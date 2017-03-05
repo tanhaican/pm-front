@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="echarts.min.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        myChart.setOption({
+			title: {
+				text: '项目总体展示',
+				subtext: '进度把控'
+			},
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'shadow'
+				},
+				formatter: '{b}<br />{a0}: {c0}%<br />{a1}: {c1}%'
+			},
+			legend: {
+				data: ['上周', '本周']
+			},
+			grid: {
+				left: '3%',
+				right: '4%',
+				bottom: '3%',
+				containLabel: true
+			},
+			xAxis: {
+				type: 'value',
+				min: 0,
+				max: 100,
+				axisLabel: {
+					show: false
+				}
+			},
+			yAxis: {
+				type: 'category',
+				data: []
+				//data: ['BE项目', '生物分析', '专项']
+			},
+			series: [
+				{
+					name: '上周',
+					type: 'bar',
+					data: []
+					//data: [11, 25, 46]
+				},
+				{
+					name: '本周',
+					type: 'bar',
+					data: []
+					//data: [22, 38, 70]
+				}
+			]
+		});
+
+		
+		setTimeout(function() {
+			// 填入数据
+			myChart.setOption({
+				yAxis: {
+					data: ['BE项目', '生物分析', '专项']
+				},
+				series: [{
+					name: '上周',
+					data: [11, 25, 46]
+				},
+				{
+					name: '本周',
+					data: [22, 38, 70]
+				}]
+			});
+		}, 1500);
+    </script>
+</body>
+</html>
